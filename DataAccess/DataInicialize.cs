@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TeatchersAndCourses.DataAccess.Context;
 
 namespace DataAccess
 {
-    public class DataInicialize
+    public static class DataInicialize
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -15,47 +17,150 @@ namespace DataAccess
                 serviceProvider.GetRequiredService<
                     DbContextOptions<TeatchersAndCoursesContext>>()))
             {
-                // Look for any movies.
-                //if (context.Movie.Any())
-                //{
-                //    return;   // DB has been seeded
-                //}
+                if (context.Teatchers.Any() || context.Courses.Any())
+                {
+                    return;
+                }
 
-                //context.Movie.AddRange(
-                //    new Movie
-                //    {
-                //        Title = "When Harry Met Sally",
-                //        ReleaseDate = DateTime.Parse("1989-2-12"),
-                //        Genre = "Romantic Comedy",
-                //        Price = 7.99M
-                //    },
+                context.Universities.AddRange(
+                    new University
+                    {
+                        Name = "Itau University",
+                    }
+                );
 
-                //    new Movie
-                //    {
-                //        Title = "Ghostbusters ",
-                //        ReleaseDate = DateTime.Parse("1984-3-13"),
-                //        Genre = "Comedy",
-                //        Price = 8.99M
-                //    },
+                context.SaveChanges();
 
-                //    new Movie
-                //    {
-                //        Title = "Ghostbusters 2",
-                //        ReleaseDate = DateTime.Parse("1986-2-23"),
-                //        Genre = "Comedy",
-                //        Price = 9.99M
-                //    },
+                context.Courses.AddRange(
+                    new Course
+                    {
+                        Name = "Matematica",
+                    },
 
-                //    new Movie
-                //    {
-                //        Title = "Rio Bravo",
-                //        ReleaseDate = DateTime.Parse("1959-4-15"),
-                //        Genre = "Western",
-                //        Price = 3.99M
-                //    }
-                //);
+                    new Course
+                    {
+                        Name = "Piano High Level",
+                    },
+
+                    new Course
+                    {
+                        Name = "Noções sobre tempo e espaço",
+                    },
+
+                    new Course
+                    {
+                        Name = "Seleção Natural",
+                    },
+
+                    new Course
+                    {
+                        Name = "Física",
+                    },
+
+                     new Course
+                     {
+                         Name = "Geografia",
+                     },
+
+                     new Course
+                     {
+                         Name = "Matematica Aplicada",
+                     },
+
+                     new Course
+                     {
+                         Name = "Filosofia",
+                     },
+
+                      new Course
+                      {
+                          Name = "Sociologia",
+                      },
+
+                       new Course
+                       {
+                           Name = "Algebra",
+                       },
+
+                       new Course
+                       {
+                           Name = "Geometria",
+                       }
+                );
+
+                var coursesUniversity = new[] {
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 1 },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 2  },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 3  },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 4 },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 5  },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 6  },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 7  },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 8  },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 9  },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 10 },
+                    new CoursesUniversity{UniversityId = context.Universities.First().Id,CourseId = 11 },
+                };
+
+                context.CoursesUniversities.AddRange(coursesUniversity);
+
+                context.SaveChanges();
+
+                context.Teatchers.AddRange(
+                    new Teatcher
+                    {
+                        Name = "Newton",
+                    },
+
+                    new Teatcher
+                    {
+                        Name = "Mozart",
+                    },
+
+                    new Teatcher
+                    {
+                        Name = "Einstein",
+                    },
+
+                    new Teatcher
+                    {
+                        Name = "Darwin",
+                    },
+
+                    new Teatcher
+                    {
+                        Name = "Rick",
+                    }
+                );
+
+                var teatchersCourses = new[] {
+                    new TeatcherCourse{TeatcherId = 1,CourseId = 1 },
+                    new TeatcherCourse{TeatcherId = 2,CourseId = 2  },
+                    new TeatcherCourse{TeatcherId = 3,CourseId = 3  },
+                    new TeatcherCourse{TeatcherId = 4,CourseId = 4 },
+                    new TeatcherCourse{TeatcherId = 5,CourseId = 6  },
+                    new TeatcherCourse{TeatcherId = 1,CourseId = 6  },
+                    new TeatcherCourse{TeatcherId = 2,CourseId = 7  },
+                    new TeatcherCourse{TeatcherId = 4,CourseId = 8  },
+                    new TeatcherCourse{TeatcherId = 5,CourseId = 9  },
+                    new TeatcherCourse{TeatcherId = 3,CourseId = 7  }
+                };
+
+                var teatchersUniversities = new[] {
+                    new TeatchersUniversity{TeatcherId = 1,UniversityId = context.Universities.First().Id },
+                    new TeatchersUniversity{TeatcherId = 2,UniversityId = context.Universities.First().Id  },
+                    new TeatchersUniversity{TeatcherId = 3,UniversityId = context.Universities.First().Id  },
+                    new TeatchersUniversity{TeatcherId = 4,UniversityId = context.Universities.First().Id },
+                    new TeatchersUniversity{TeatcherId = 5,UniversityId = context.Universities.First().Id  }
+                };
+
+                context.TeatcherCourses.AddRange(teatchersCourses);
+                context.TeatchersUniversities.AddRange(teatchersUniversities);
+
                 context.SaveChanges();
             }
         }
+
     }
 }
+

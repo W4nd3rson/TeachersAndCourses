@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccess.Repository;
+using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,7 +37,11 @@ namespace TeachersAndCourses
 
             services.AddDbContext<TeatchersAndCoursesContext>(options =>
              options.UseSqlServer(
-          Configuration.GetConnectionString("TeatchersAndCourses")));
+             Configuration.GetConnectionString("TeatchersAndCourses")));
+
+            services.AddTransient<ICourseRepository, CourseRepository>();
+            services.AddTransient<IUniversityRepository, UniversityRepository>();
+            services.AddTransient<ITeatcherRepository, TeatcherRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

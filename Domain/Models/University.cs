@@ -7,7 +7,7 @@ namespace Domain.Models
     public class University:BaseEntity
     {
         public string Name { get; set; }
-        public virtual ICollection<Course> Courses { get; set; }
-        public virtual ICollection<Teatcher> Teatchers { get; set; }
+        public ICollection<TeatcherCourse> TeatcherCourses { get; set; }
+        public ICollection<CoursesUniversity> CoursesUniversities { get; set; }
     }
 }
