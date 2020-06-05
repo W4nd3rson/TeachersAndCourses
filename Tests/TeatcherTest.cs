@@ -14,5 +14,13 @@ namespace Tests
         {
             Assert.Pass();
         }
+
+        [Test]
+        public void ShouldReturnTeatcherCourse()
+        {
+            var teatcher = Mock.TeatcherMock();
+
+            Assert.Greater(teatcher.Courses.Count, 0);
+        }
     }
 }

@@ -1,0 +1,32 @@
+﻿@model Domain.Models.Teatcher
+
+@{
+    ViewData["Title"] = "Excluir Professor";
+}
+
+<h2>Excluir Professor</h2>
+
+<h3>Tem certeza que deseja excluir esse professor?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Excluir" class="btn btn-default" /> |
+        <a asp-action="Index">Voltar a Lista</a>
+    </form>
+</div>

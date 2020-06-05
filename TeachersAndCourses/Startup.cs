@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Services;
+using Services.IServices;
 using TeatchersAndCourses.DataAccess.Context;
 
 namespace TeachersAndCourses
@@ -43,6 +45,10 @@ namespace TeachersAndCourses
             services.AddTransient<IUniversityRepository, UniversityRepository>();
             services.AddTransient<ITeatcherRepository, TeatcherRepository>();
 
+            services.AddTransient<ITeatcherService, TeatcherService>();
+            services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<IUniversityService, UniversityService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -67,7 +73,7 @@ namespace TeachersAndCourses
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Teatchers}/{action=Index}/{id?}");
             });
         }
     }

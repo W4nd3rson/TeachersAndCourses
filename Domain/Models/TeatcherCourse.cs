@@ -10,15 +10,5 @@ namespace Domain.Models
         public Teatcher Teatcher { get; set; }
         public int CourseId { get; set; }
         public Course Course { get; set; }
-
-        public TeatcherCourse(TeatcherCourse teatcherCourse)
-        {
-            this.TeatcherId = teatcherCourse.TeatcherId;
-            this.CourseId = teatcherCourse.CourseId;
-        }
-
-        public TeatcherCourse()
-        {
-        }
     }
 }

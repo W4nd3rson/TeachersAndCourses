@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Domain.Models.Teatcher>
+
+@{
+    ViewData["Title"] = "Todos os Professores";
+}
+
+    <h2>Todos os Professores</h2>
+
+<p>
+    <a asp-action="Create">Cadastrar novo Professor</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Name) </a>  
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes desse professor</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Excluir Professor</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

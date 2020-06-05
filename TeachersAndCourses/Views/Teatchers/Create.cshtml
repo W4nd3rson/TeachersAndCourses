@@ -1,0 +1,42 @@
+﻿@model Domain.Models.ViewModels.TeatcherViewModel
+
+@{
+    ViewData["Title"] = "Cadastrar Professor";
+}
+
+<h2>Novo Professor</h2>
+
+<h4>Professor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Teatcher.Name" class="control-label"></label>
+                <input asp-for="Teatcher.Name" class="form-control" />
+                <span asp-validation-for="Teatcher.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Teatcher.Courses" class="control-label"></label>
+                <select name="Courses" multiple="multiple" class="selectpicker form-control">
+                    @foreach (var course in Model.Courses)
+                    {
+                        <option value="@course.Id">@course.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para Lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
